@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="2026 Business Meeting">
+    <meta property="og:description" content="First United Pentecostal Church of Jacksonville">
+    <title>2026 Business Meeting Summary</title>
+    <style>
+        /* iOS-style Typography and Reset */
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #1c1c1e;
+            --link-color: #00008B; /* Dark Dark Blue */
+            --meta-color: #8e8e93;
+            --border-color: #e5e5ea;
+            --highlight-fade: #fff685; /* Soft Yellow for temporary flash */
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px 16px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+            -webkit-font-smoothing: antialiased;
+            padding-bottom: 80px; /* Extra space for the floating button */
+        }
+
+        /* Headers */
+        h1 {
+            font-size: 32px;
+            font-weight: 800;
+            text-align: center;
+            margin-bottom: 5px;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+            padding: 20px 0;
+            border-bottom: 2px solid var(--text-color);
+        }
+
+        h2 {
+            font-size: 20px;
+            font-weight: 700;
+            margin-top: 40px;
+            margin-bottom: 15px;
+            letter-spacing: -0.3px;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 5px;
+            color: var(--text-color);
+        }
+
+        h3 {
+            font-size: 16px;
+            font-weight: 600;
+            text-transform: uppercase;
+            color: var(--meta-color);
+            margin-top: 30px;
+            margin-bottom: 10px;
+        }
+
+        /* Meeting Metadata */
+        .meta-header {
+            text-align: center;
+            font-size: 14px;
+            color: var(--meta-color);
+            margin-bottom: 30px;
+            font-family: "Menlo", "Courier New", monospace;
+        }
+
+        /* Table of Contents Styling */
+        .toc-container {
+            background-color: #f2f2f7; /* iOS grouped background color */
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 40px;
+            font-size: 15px;
+            scroll-margin-top: 20px;
+        }
+
+        .toc-title {
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-transform: uppercase;
+            font-size: 13px;
+            color: var(--meta-color);
+            border-bottom: 1px solid #d1d1d6;
+            padding-bottom: 5px;
+        }
+
+        .toc-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc-item {
+            margin-bottom: 12px;
+            line-height: 1.4;
+        }
+
+        /* Link Styling */
+        a {
+            color: var(--link-color);
+            text-decoration: none;
+            cursor: pointer;
+        }
+        
+        a:hover {
+            text-decoration: underline;
+        }
+
+        a.toc-link {
+            font-weight: 600;
+            display: block;
+            margin-bottom: 2px;
+        }
+
+        .toc-sub {
+            font-size: 14px;
+            color: #444;
+            margin-left: 15px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .toc-detail {
+            font-size: 13px;
+            color: #666;
+            margin-left: 25px;
+            display: block;
+            font-style: italic;
+        }
+
+        /* Transcript Content Styling */
+        .transcript-block {
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 6px;
+            transition: background-color 0.3s;
+        }
+
+        .speaker {
+            font-weight: 700;
+            color: #000;
+            margin-right: 5px;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .transcript-text {
+            color: #333;
+        }
+
+        /* Animation for Target Highlight (The Flash Effect) */
+        @keyframes highlightFade {
+            0% { background-color: var(--highlight-fade); }
+            20% { background-color: var(--highlight-fade); }
+            100% { background-color: transparent; }
+        }
+
+        /* When an element is targeted via ID anchor */
+        :target {
+            animation: highlightFade 3s ease-out;
+            scroll-margin-top: 40px; /* Offset for comfortable reading */
+            border-radius: 8px;
+        }
+
+        /* Utility */
+        hr {
+            border: 0;
+            border-top: 1px solid var(--border-color);
+            margin: 40px 0;
+        }
+
+        /* --- SCROLL TO INDEX BUTTON STYLES --- */
+        #backToIndexBtn {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            z-index: 999;
+            border: none;
+            outline: none;
+            background-color: var(--link-color);
+            color: white;
+            cursor: pointer;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            
+            /* Hidden by default, toggled by JS */
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            transition: opacity 0.3s ease, transform 0.3s ease, background-color 0.3s;
+        }
+
+        #backToIndexBtn.show {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        #backToIndexBtn:hover {
+            background-color: #000050; /* Darker shade on hover */
+            transform: scale(1.1);
+        }
+
+        #backToIndexBtn:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Back to Index Button -->
+    <button id="backToIndexBtn" title="Back to Summary">
+        <!-- SVG Up Arrow -->
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="12" y1="19" x2="12" y2="5"></line>
+            <polyline points="5 12 12 5 19 12"></polyline>
+        </svg>
+    </button>
+
+    <!-- Main Title (Big & Bold as requested) -->
+    <h1>2026 ANNUAL BUSINESS MEETING SUMMARY<br>FIRST UNITED PENTECOSTAL CHURCH OF JACKSONVILLE</h1>
+
+    <div class="meta-header">
+        DATE: February 2, 2026<br>
+        PRESIDING: Pastor John Hopkins<br>
+        ATTENDANCE: ~20
+    </div>
+
+    <!-- Table of Contents / Summary -->
+    <div class="toc-container" id="main-index">
+        <div class="toc-title">Table of Contents (Summary)</div>
+        <ul class="toc-list">
+            
+            <!-- Section I -->
+            <li class="toc-item">
+                <a href="#sec-opening" class="toc-link">I. OPENING & BOARD RATIFICATION</a>
+                <a href="#prayer" class="toc-sub">• Opening Prayer: Gratitude for facilities, staff, volunteers.</a>
+                <a href="#ratification" class="toc-sub">• Board Ratification: Motion passed unanimously.</a>
+                <a href="#ratification-details" class="toc-detail">Members: Hopkins, Coleman, Parks, Brock, White, Sharp, Meehan.</a>
+                <a href="#nuance-jokes" class="toc-sub">• Nuance: "Jobs are safe" and "non-benefits."</a>
+            </li>
+
+            <!-- Section II -->
+            <li class="toc-item">
+                <a href="#sec-finance" class="toc-link">II. FINANCIAL & FACILITIES REPORT</a>
+                <a href="#financial-health" class="toc-sub">• Financial Health: Healthiest in 15 years; 4 years of growth.</a>
+                <a href="#audits" class="toc-sub">• Audits: Internal balanced. External done every 4-5 years.</a>
+                <a href="#projects-wagon" class="toc-sub">• Completed Projects: Hay Wagon ($500).</a>
+                <a href="#projects-playground" class="toc-sub">• Completed Projects: Playground (Pending edging/mulch).</a>
+                <a href="#future-pump" class="toc-sub">• Future: Pump House (Rough shape, needs expansion).</a>
+                <a href="#future-sign" class="toc-sub">• Future: Signage (Landscaping removed, planning phase).</a>
+            </li>
+
+            <!-- Section III -->
+            <li class="toc-item">
+                <a href="#sec-qa" class="toc-link">III. Q&A SESSION</a>
+                
+                <div style="margin-top: 8px;"><strong>1. Cheryl Dodd</strong></div>
+                <a href="#qa-missions" class="toc-sub">• Missions Giving: $22,907.49 total.</a>
+                <a href="#qa-property" class="toc-sub">• Property Sale (St. Johns River): Under contract for $70k (Loss).</a>
+                <a href="#qa-funds" class="toc-sub">• Fund Allocation: Proceeds to General Savings.</a>
+
+                <div style="margin-top: 8px;"><strong>2. Ben Meehan</strong></div>
+                <a href="#qa-signage" class="toc-sub">• Signage Details: Short-term "facelift" vs Long-term structure.</a>
+                <a href="#qa-digital" class="toc-detail">Policy: No digital/LED signs (expensive/overrated).</a>
+
+                <div style="margin-top: 8px;"><strong>3. Kevin Rathbun</strong></div>
+                <a href="#qa-mil" class="toc-sub">• Trailers: Mother-in-law suite repairs & Nancy Justice trailer removal.</a>
+
+                <div style="margin-top: 8px;"><strong>4. Nissi Rapp</strong></div>
+                <a href="#qa-nursery" class="toc-sub">• Nursery Renovation: Safety concerns (tile) & Privacy issues.</a>
+                <a href="#qa-proposal" class="toc-detail">Proposal: Move toddlers upstairs; convert downstairs to Nursing Room.</a>
+
+                <div style="margin-top: 8px;"><strong>5. Danelle Steven</strong></div>
+                <a href="#qa-kindergarten" class="toc-sub">• Kindergarten (JCA): Expansion inquiry. Strategy meeting proposed.</a>
+            </li>
+
+            <!-- Section IV -->
+            <li class="toc-item">
+                <a href="#sec-adjourn" class="toc-link">IV. ADJOURNMENT</a>
+                <a href="#adjournment" class="toc-sub">[Motion Passed]</a>
+            </li>
+        </ul>
+    </div>
+
+    <hr>
+
+    <!-- TRANSCRIPT CONTENT -->
+    
+    <h2>TRANSCRIPT</h2>
+
+    <div class="transcript-block" id="sec-opening">
+        <span class="speaker">Pastor John Hopkins:</span>
+        <div class="transcript-text" id="prayer">
+            "Praise the Lord, everyone. Let's all stand. Let's begin with a word of prayer tonight before we start our business meeting. I wanna say thank you for all of you who have taken the time tonight to just be here and present and to show interest in the business of the church. Amen. Let's pray. Let's just ask the Lord to give us a direction tonight. Lord Jesus, we thank you, Lord, for this wonderful day that you have given us and each opportunity. Oh, Lord, we give you glory. We ask, Lord, that You would bless us tonight. Thank you, Lord, for blessing our church and our congregation, the wonderful facilities and staff and volunteers."
+        </div>
+    </div>
+
+    <div class="transcript-block" id="ratification">
+        <span class="speaker">Pastor John Hopkins:</span>
+        <div class="transcript-text">
+            "I call this meeting to order and as our first point of order as every year we need to ratify our board. And so if one of you would like to give us a motion to ratify the church board as presented tonight. Anyone? Anyone? It doesn't really matter."
+        </div>
+    </div>
+
+    <div class="transcript-block">
+        <span class="speaker">Sister Natalie:</span>
+        <div class="transcript-text">"[Inaudible Motion]"</div>
+        <br>
+        <span class="speaker">Pastor John Hopkins:</span>
+        <div class="transcript-text">"Thank you, Sister Natalie. Now I need someone to second."</div>
+        <br>
+        <span class="speaker">Brother Leach:</span>
+        <div class="transcript-text">"[Inaudible Second]"</div>
+        <br>
+        <span class="speaker">Pastor John Hopkins:</span>
+        <div class="transcript-text">"Brother Leach has seconded. Okay, so all of you in favor of ratifying our church board for another year, say aye."</div>
+        <br>
+        <span class="speaker">Congregation:</span>
+        <div class="transcript-text">"Aye."</div>
+    </div>
+
+    <div class="transcript-block" id="nuance-jokes">
+        <span class="speaker">Pastor John Hopkins:</span>
+        <div class="transcript-text" id="ratification-details">
+            "All opposed. Same sign. No opposed. Thank you. Our church board is no longer sweating. Their jobs are safe. And all of the non-benefits they get from their job."
+        </div>
+    </div>
+
+    <div class="transcript-block" id="sec-finance">
+        <span class="speaker">Pastor John Hopkins:</span>
+        <div class="transcript-text" id="audits">
+            "So now that that is out of the way. I met with the church board the week before last and went through the entire financial report for the '24-'25 year. All of the accounts were in good standing and balanced. Just so everyone is aware. We also do a self audit every four to five years where we hire an independent third party company that we fly in and they come and they audit all of our books. We had that done last in '22. So we probably have a couple more years before we do that."
+        </div>
+    </div>
+
+    <div class="transcript-block">
+        <span class="speaker">Pastor John Hopkins:</span>
+        <div class="transcript-text">
+            "As a matter of fact, you do as a member of the church have a right to see that information. You simply have to make a official request that is in our bylaws. You have to make an official request within... and I'm going to show because it's been a while since I've read this part, but I believe it's within 10 days of tonight."
+        </div>
+    </div>
+
+    <div class="transcript-block" id="financial-health">
+        <span class="speaker">Pastor John Hopkins:</span>
+        <div class="transcript-text">
+            "I can report that our accounts have not remained at the same level, but they have increased. They are healthy, healthier than they were the year before... Since 2019, year over year for four years, the finances of the church increased year over year for four years straight... the finances of the church are as healthy as they have been at any point since I've been pastor in 15 years."
+        </div>
+    </div>
+
+    <div class="transcript-block" id="projects-playground">
+        <span class="speaker">Pastor John Hopkins:</span>
+        <div class="transcript-text">
+            "So this last year, as far as new projects go, you may have seen a couple of developments. The most obvious one is the playground. The playground is not done. It is close to completion... We are leaning towards concrete and then we are leaning towards rubberized mulch to then fill that area. And then we are also looking into fencing that area as well. So it will not be open to the public until such a time that those things are completed."
+        </div>
+    </div>
+
+    <div class="transcript-block" id="projects-wagon">
+        <span class="speaker">Pastor John Hopkins:</span>
+        <div class="transcript-text">
+            "This last year, we secured the purchase of the wagon. Many of you that come to Fall Funday, you know that we use that hay wagon pretty much every year. And we purchased it this year... Sister Coleman, how much did we pay for it?"
+        </div>
+        <br>
+        <span class="speaker">Michele Coleman:</span>
+        <div class="transcript-text">"$500."</div>
+        <br>
+        <span class="speaker">Pastor John Hopkins:</span>
+        <div class="transcript-text">"So, we paid $500 for the wagon."</div>
+    </div>
+
+    <div class="transcript-block" id="future-sign">
+        <span class="speaker">Pastor John Hopkins:</span>
+        <div class="transcript-text">
+            "And then, in preparation for a future project... I don't know if some of you noticed around our sign, all of the landscaping, all of those large boulders and rocks were removed. That was done in preparation for a future project where we do want to update our sign. Our sign is in rough shape, and it kind of is the face of our church when people drive by."
+        </div>
+    </div>
+
+    <div class="transcript-block" id="future-pump">
+        <span class="speaker">Pastor John Hopkins:</span>
+        <div class="transcript-text">
+            "Another project that we are wanting to tackle... Our pump house, our watershed, is in rough, rough shape. And this is really important for the church, for the school, and for those who live on the facility. And we really need to address some things in the pump house, expand it a little bit."
+        </div>
+    </div>
+
+    <div class="transcript-block" id="sec-qa">
+        <hr>
+        <h3>Q&A SESSION</h3>
+        <span class="speaker">Pastor John Hopkins:</span>
+        <div class="transcript-text">
+            "So, with that said, I'm going to open the floor to any questions regarding any of the current projects, any of the future projects, or things that you would just like to bring up or present to the board."
+        </div>
+    </div>
+
+    <div class="transcript-block" id="qa-missions">
+        <span class="speaker">Pastor John Hopkins:</span>
+        <div class="transcript-text">
+            "I actually gave that report on Sunday. So the missions giving for last year... specifically missions giving was $22,907.49. So that was what was given to missions but what goes out is much more than what goes in."
+        </div>
+    </div>
+
+    <div class="transcript-block" id="qa-property">
+        <span class="speaker">Cheryl Dodd:</span>
+        <div class="transcript-text">"There was a question about the property on the St. Johns River?"</div>
+        <br>
+        <span class="speaker">Pastor John Hopkins:</span>
+        <div class="transcript-text">
+            "Yes... We have an interested buyer. We have signed a contract that contract or the closing on that would not be until the 26th of this month of February... currently we do have a contract on the property."
+        </div>
+        <br>
+        <span class="speaker">Cheryl Dodd:</span>
+        <div class="transcript-text">"Can we ask how much?"</div>
+        <br>
+        <span class="speaker">Pastor John Hopkins:</span>
+        <div class="transcript-text">
+            "$70,000 and yes we are selling it at a loss... We are selling it at a loss because well first of all the value of the property is way overvalued in that area and there's no development in that area for around I don't know eight or nine miles... We had one neighbor working against us... telling everyone know that that property flooded every year."
+        </div>
+    </div>
+
+    <div class="transcript-block" id="qa-funds">
+        <span class="speaker">Cheryl Dodd:</span>
+        <div class="transcript-text">"Can the funds be put into the building program?"</div>
+        <br>
+        <span class="speaker">Pastor John Hopkins:</span>
+        <div class="transcript-text">"It is just going to go into the church savings account. We don't plan to touch the money unless there is a very specific reason to touch it."</div>
+    </div>
+
+    <div class="transcript-block" id="qa-signage">
+        <span class="speaker">Ben Meehan:</span>
+        <div class="transcript-text">"Can you explain in a little bit more detail what the temporary sign thoughts are?"</div>
+        <br>
+        <span class="speaker">Pastor John Hopkins:</span>
+        <div class="transcript-text" id="qa-digital">
+            "What we would like to do long term is to get away from the technology type sign and go with more of a traditional signage... I'm not really interested in personally doing any kind of digital signage. They can be complicated. They're also extremely expensive. I personally think they're overrated... That being said, we do feel like we can't wait two or three years and just the sign looks rough. So there's some things that we can do... Giving it a facelift. They've got all kinds of coverings that you can wrap it with that look like real stone."
+        </div>
+    </div>
+
+    <div class="transcript-block" id="qa-mil">
+        <span class="speaker">Kevin Rathbun:</span>
+        <div class="transcript-text">"Could you address the trailers? Your mother-in-law's trailer... And Nancy's trailer?"</div>
+        <br>
+        <span class="speaker">Pastor John Hopkins:</span>
+        <div class="transcript-text">
+            "Yes. So my mother-in-law has probably been six months moved from the small trailer to the double-wide. So what happened was the sub-flooring in the small trailer rotted... I anticipate her moving back into the small trailer within, I don't know, six to eight weeks."
+        </div>
+        <br>
+        <span class="speaker">Kevin Rathbun:</span>
+        <div class="transcript-text">"About Nancy's trailer?"</div>
+        <br>
+        <span class="speaker">Pastor John Hopkins:</span>
+        <div class="transcript-text">
+            "Our intention is to reach out to the current owner of it and kindly suggest that they find a permanent home for it and relocate it. And if that doesn't seem to work, then we will probably begin to charge them for renting a place to keep it."
+        </div>
+    </div>
+
+    <div class="transcript-block" id="qa-nursery">
+        <span class="speaker">Nissi Rapp:</span>
+        <div class="transcript-text">"Are there any plans in the next year or so to update or renovate the nursery?"</div>
+        <br>
+        <span class="speaker">Pastor John Hopkins:</span>
+        <div class="transcript-text">"No, there isn't. But if you'd like to present something or suggest something, you're free to do so."</div>
+        <br>
+        <span class="speaker">Nissi Rapp:</span>
+        <div class="transcript-text">
+            "Like the hard flooring in the nursery. I feel like it's not suitable for children, toddlers... It's not suitable or ideal for nursing mothers... Myself, I'll just go. I would go to the prayer room because it's more secluded."
+        </div>
+        <br>
+        <span class="speaker">Pastor John Hopkins:</span>
+        <div class="transcript-text">
+            "Yeah. We can try to do something. I will tell you that we, in the past, tried to provide some privacy areas within the nursery. And we got complaints from mothers... I don't really know. I'm being honest with you. I don't know how to make everyone happy in the nursery."
+        </div>
+    </div>
+
+    <div class="transcript-block" id="qa-proposal">
+        <span class="speaker">Nissi Rapp:</span>
+        <div class="transcript-text">
+            "I have a suggestion. Is there space upstairs to convert a classroom a nursery classroom for upstairs... and modify this nursery for an explicit breastfeeding nursing mothers... you could just put a few comfy gliders in there throw your carpet on it wouldn't get ruined?"
+        </div>
+        <br>
+        <span class="speaker">Pastor John Hopkins:</span>
+        <div class="transcript-text">
+            "Okay yeah no yeah I mean I'm not against that at all. We can check... I will have to check with the Sunday School department to verify you know what spaces are not being used but I'll definitely look into that."
+        </div>
+    </div>
+
+    <div class="transcript-block" id="qa-kindergarten">
+        <span class="speaker">Danelle Steven:</span>
+        <div class="transcript-text">"Brother Hopkins... do you plan to do anything more with the school... as far as the kindergarten department is concerned?"</div>
+        <br>
+        <span class="speaker">Pastor John Hopkins:</span>
+        <div class="transcript-text">
+            "Um... I honestly don't know. That's not a conversation I've had... I think that that would be a conversation that I need to have with Sister Hopkins and with Sister Kelsey to explore that."
+        </div>
+    </div>
+
+    <div class="transcript-block" id="sec-adjourn">
+        <hr>
+        <h3>ADJOURNMENT</h3>
+        <span class="speaker">Pastor John Hopkins:</span>
+        <div class="transcript-text">
+            "Anyone else? No one wants to grill a board member they're up here just ready down there okay all right last chance... okay I will entertain a motion to adjourn. Sister Steven seconded and Sister Natalie and Sister Karen at the same time. Amen. Well with that all in favor of adjourning say aye."
+        </div>
+        <br>
+        <span class="speaker">Congregation:</span>
+        <div class="transcript-text" id="adjournment">*no contest*</div>
+        <br>
+        <span class="speaker">Pastor John Hopkins:</span>
+        <div class="transcript-text">"All opposed same sign and that is it you are dismissed."</div>
+    </div>
+
+    <script>
+        // Get the button
+        var mybutton = document.getElementById("backToIndexBtn");
+
+        // When the user scrolls down 100px from the top of the document, show the button
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+            if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+                mybutton.classList.add("show");
+            } else {
+                mybutton.classList.remove("show");
+            }
+        }
+
+        // When the user clicks on the button, scroll to the TOC container smoothly
+        mybutton.addEventListener('click', function() {
+            var tocElement = document.getElementById('main-index');
+            if(tocElement) {
+                tocElement.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                
+                // Remove fragment from URL to clean it up (optional polish)
+                history.replaceState(null, null, ' ');
+            }
+        });
+    </script>
+</body>
+</html>
